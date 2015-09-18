@@ -25,6 +25,7 @@ class MessageHandler {
             case 'test':
                 data.status = 'warn';
                 this.postMessage(data);
+                this.postMessage(data);
                 data.message *= 100;
                 this.postMessage(data);
                 setTimeout(() => {

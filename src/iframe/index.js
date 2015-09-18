@@ -18,9 +18,6 @@ exports.start = function () {
     messageHandler.init(window.parent);
     window.addEventListener('message', function (event) {
         let data = event.data;
-        if (!data.messageID) {
-            return debug('received a message without a messageID');
-        }
         debug('message received', data);
         MessageHandler.handleMessage(data);
     });

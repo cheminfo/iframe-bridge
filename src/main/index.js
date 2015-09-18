@@ -36,7 +36,7 @@ exports.postAll = function(type, message) {
             message,
             type
         };
-        messageHandler.handleMessage(data);
+        messageHandler.postMessage(data);
     });
 };
 
