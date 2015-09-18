@@ -29,3 +29,7 @@ exports.start = function () {
 exports.postMessage = function (type, message) {
     return messageHandler.postMessage(type, message);
 };
+
+exports.onMessage = function(cb) {
+   messageHandler.on('message', cb);
+};

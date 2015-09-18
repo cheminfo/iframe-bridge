@@ -29,7 +29,15 @@ window.addEventListener('message', function (event) {
     }
 });
 
-// todo create method to send a message to all iframes
+exports.postAll = function(message) {
+    messageHandlers.forEach(function(messageHandler, windowID) {
+        var data = {
+            windowID,
+            message
+        };
+        messageHandler.handleMessage(data);
+    });
+};
 
 exports.registerHandler = function (type, callback) {
     MessageHandler.registerHandler(type, callback);

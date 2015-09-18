@@ -3,11 +3,14 @@
 const Message = require('./Message');
 const debug = require('debug')('MessageHandler');
 
+const EventEmitter = require('events');
+
 let idCounter = 0;
 let postedMessages = new Map();
 
-class MessageHandler {
+class MessageHandler extends EventEmitter {
     constructor() {
+        super();
         this.ready = false;
         this.windowID = null;
         this.messageSource = null;
@@ -53,7 +56,7 @@ class MessageHandler {
 
     static handleMessage(data) {
         if (!postedMessages.has(data.messageID)) {
-            return debug('message not found: ' + data.messageID);
+            return this.emit('message', data);
         }
         let message = postedMessages.get(data.messageID);
         if (data.status) {
