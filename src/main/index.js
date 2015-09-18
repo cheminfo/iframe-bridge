@@ -29,11 +29,12 @@ window.addEventListener('message', function (event) {
     }
 });
 
-exports.postAll = function(message) {
+exports.postAll = function(type, message) {
     messageHandlers.forEach(function(messageHandler, windowID) {
         var data = {
             windowID,
-            message
+            message,
+            type
         };
         messageHandler.handleMessage(data);
     });
