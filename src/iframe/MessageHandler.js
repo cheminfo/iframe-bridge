@@ -54,7 +54,7 @@ class MessageHandler extends EventEmitter {
         }
     }
 
-    static handleMessage(data) {
+    handleMessage(data) {
         if (!postedMessages.has(data.messageID)) {
             return this.emit('message', data);
         }

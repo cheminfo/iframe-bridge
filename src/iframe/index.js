@@ -19,7 +19,7 @@ exports.start = function () {
     window.addEventListener('message', function (event) {
         let data = event.data;
         debug('message received', data);
-        MessageHandler.handleMessage(data);
+        messageHandler.handleMessage(data);
     });
 };
 
@@ -27,6 +27,6 @@ exports.postMessage = function (type, message) {
     return messageHandler.postMessage(type, message);
 };
 
-exports.onMessage = function(cb) {
-   messageHandler.on('message', cb);
+exports.onMessage = function (cb) {
+    messageHandler.on('message', cb);
 };
