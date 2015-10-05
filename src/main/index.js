@@ -26,9 +26,8 @@ window.addEventListener('message', function (event) {
         } else {
             return debug('received message before handler creation', data);
         }
-    } else {
-        messageHandlers.get(data.windowID).handleMessage(data);
     }
+    messageHandlers.get(data.windowID).handleMessage(data);
 });
 
 exports.postAll = function(type, message) {
