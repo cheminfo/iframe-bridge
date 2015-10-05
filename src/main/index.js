@@ -42,6 +42,17 @@ exports.postAll = function(type, message) {
     });
 };
 
+exports.postMessage = function(type, message, windowId) {
+    let messageHandler = messageHandlers.get(windowId);
+    if(messageHandler) {
+        messageHandler.postMessage({
+            windowId,
+            message,
+            type
+        });
+    }
+};
+
 exports.registerHandler = function (type, callback) {
     MessageHandler.registerHandler(type, callback);
 };
