@@ -3,7 +3,7 @@
 const Debug = require('debug');
 window.Debug = Debug;
 
-const debug = Debug('iframe');
+const debug = Debug('iframe-bridge:iframe');
 const MessageHandler = require('./MessageHandler');
 
 let messageHandler = new MessageHandler();

@@ -1,7 +1,6 @@
 'use strict';
 
 const Message = require('./Message');
-const debug = require('debug')('MessageHandler');
 
 const EventEmitter = require('events');
 

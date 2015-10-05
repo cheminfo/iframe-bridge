@@ -5,6 +5,8 @@ if (window.DebugNS) {
     Debug.enable(window.DebugNS);
 }
 
+const debug = Debug('iframe-bridge:main');
+
 const MessageHandler = require('./MessageHandler');
 const messageHandlers = new Map();
 

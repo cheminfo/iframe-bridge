@@ -1,6 +1,6 @@
 'use strict';
 
-const debug = require('debug')('chrome-app');
+const debug = require('debug')('iframe-bridge:MessageHandler');
 
 const registeredHandlers = new Map();
 
