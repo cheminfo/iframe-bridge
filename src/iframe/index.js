@@ -23,3 +23,7 @@ exports.postMessage = function (type, message) {
 exports.onMessage = function (cb) {
     messageHandler.on('message', cb);
 };
+
+exports.ready = function() {
+      messageHandler.handlePendingMessages();
+};

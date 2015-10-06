@@ -10,14 +10,16 @@ let postedMessages = new Map();
 class MessageHandler extends EventEmitter {
     constructor() {
         super();
-        this.ready = false;
+        this.readyToPost = false;
+        this.readyToHandle = false;
         this.windowID = null;
         this.messageSource = null;
         this.pendingMessages = [];
+        this.unhandledMessages = [];
     }
 
     init(messageSource) {
-        this.ready = true;
+        this.readyToPost = true;
         this.windowID = Math.floor(window.performance.now());
         this.messageSource = messageSource;
         this.messageSource.postMessage({
@@ -36,7 +38,7 @@ class MessageHandler extends EventEmitter {
             windowID: this.windowID
         };
         let theMessage = new Message(id, toPost);
-        if (this.ready) {
+        if (this.readyToPost) {
             this.messageSource.postMessage(toPost, '*');
             postedMessages.set(id, theMessage);
         } else {
@@ -52,8 +54,19 @@ class MessageHandler extends EventEmitter {
             postedMessages.set(message.id, message);
         }
     }
+    
+    handlePendingMessages() {
+        this.readyToHandle = true;
+        for(let i=0; i<this.unhandledMessages.length; i++) {
+            this.handleMessage(this.unhandledMessages[i]);
+        }
+        this.unhandledMessages = [];
+    }
 
     handleMessage(data) {
+        if(!this.readyToHandle) {
+            this.unhandledMessages.push(data);
+        }
         if (!postedMessages.has(data.messageID)) {
             return this.emit('message', data);
         }
