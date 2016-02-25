@@ -66,6 +66,7 @@ class MessageHandler extends EventEmitter {
     handleMessage(data) {
         if(!this.readyToHandle) {
             this.unhandledMessages.push(data);
+            return;
         }
         if (!postedMessages.has(data.messageID)) {
             return this.emit('message', data);
