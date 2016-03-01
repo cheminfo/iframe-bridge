@@ -1,6 +1,7 @@
 'use strict';
 
 const debug = require('debug')('iframe-bridge:MessageHandler');
+const bridgeHandler = require('./bridgeHandler');
 
 const registeredHandlers = new Map();
 
@@ -33,5 +34,7 @@ class MessageHandler {
 MessageHandler.registerHandler = function (type, callback) {
     registeredHandlers.set(type, callback);
 };
+
+MessageHandler.registerHandler('bridge', bridgeHandler);
 
 module.exports = MessageHandler;
