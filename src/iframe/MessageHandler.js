@@ -20,7 +20,7 @@ class MessageHandler extends EventEmitter {
 
     init(messageSource) {
         this.readyToPost = true;
-        this.windowID = Math.floor(window.performance.now());
+        this.windowID = Date.now();
         this.messageSource = messageSource;
         this.messageSource.postMessage({
             type: 'admin.connect',
