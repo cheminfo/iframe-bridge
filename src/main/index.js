@@ -23,6 +23,8 @@ window.addEventListener('message', function (event) {
         if (data.type === 'admin.connect') {
             handler = new MessageHandler(event.source);
             messageHandlers.set(data.windowID, handler);
+        } else if(data.type === 'admin.disconnect') {
+            messageHandlers.delete(data.windowID);
         } else {
             return debug('received message before handler creation', data);
         }
