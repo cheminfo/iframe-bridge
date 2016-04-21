@@ -17,15 +17,19 @@ class MessageHandler extends EventEmitter {
         this.pendingMessages = [];
         this.unhandledMessages = [];
     }
+    
+    _postMessageToSource(message) {
+        this.messageSource.postMessage(JSON.stringify(message), '*');
+    }
 
     init(messageSource) {
         this.readyToPost = true;
         this.windowID = Date.now();
         this.messageSource = messageSource;
-        this.messageSource.postMessage({
+        this._postMessageToSource({
             type: 'admin.connect',
             windowID: this.windowID
-        }, '*');
+        });
 
         window.addEventListener('unload', () => {
              this.messageSource.postMessage({
@@ -47,7 +51,7 @@ class MessageHandler extends EventEmitter {
         };
         let theMessage = new Message(id, toPost);
         if (this.readyToPost) {
-            this.messageSource.postMessage(toPost, '*');
+            this._postMessageToSource(toPost);
             postedMessages.set(id, theMessage);
         } else {
             this.pendingMessages.push(theMessage);
@@ -58,7 +62,7 @@ class MessageHandler extends EventEmitter {
     postPendingMessages() {
         for (let message of this.pendingMessages) {
             message.data.windowID = this.windowID;
-            this.messageSource.postMessage(message.data, '*');
+            this._postMessageToSource(message.data);
             postedMessages.set(message.id, message);
         }
     }

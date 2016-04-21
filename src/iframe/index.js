@@ -11,9 +11,11 @@ let messageHandler = new MessageHandler();
 
 messageHandler.init(window.parent);
 window.addEventListener('message', function (event) {
-    let data = event.data;
-    debug('message received', data);
-    messageHandler.handleMessage(data);
+    try {
+        let data = JSON.parse(event.data);
+        debug('message received', data);
+        messageHandler.handleMessage(data);
+    } catch (e) {}
 });
 
 exports.postMessage = function (type, message) {

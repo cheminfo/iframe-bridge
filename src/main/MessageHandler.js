@@ -12,7 +12,7 @@ class MessageHandler {
     }
 
     postMessage(message) {
-        this.window.postMessage(message, '*');
+        this.window.postMessage(JSON.stringify(message), '*');
     }
 
     handleMessage(data) {

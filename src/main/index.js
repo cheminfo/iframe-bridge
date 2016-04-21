@@ -11,26 +11,28 @@ const MessageHandler = require('./MessageHandler');
 const messageHandlers = new Map();
 
 window.addEventListener('message', function (event) {
-    let data = event.data;
-    if (!data.windowID) {
-        return debug('received a message without windowID', data);
-    }
-    if (!data.type) {
-        return debug('received a message without type', data);
-    }
-    let handler;
-    if (!messageHandlers.has(data.windowID)) {
-        if (data.type === 'admin.connect') {
-            handler = new MessageHandler(event.source);
-            messageHandlers.set(data.windowID, handler);
-        } else {
-            return debug('received message before handler creation', data);
+    try {
+        let data = JSON.parse(event.data);
+        if (!data.windowID) {
+            return debug('received a message without windowID', data);
         }
-    } else if(data.type === 'admin.disconnect') {
-        messageHandlers.delete(data.windowID);
-        return;
-    }
-    messageHandlers.get(data.windowID).handleMessage(data);
+        if (!data.type) {
+            return debug('received a message without type', data);
+        }
+        let handler;
+        if (!messageHandlers.has(data.windowID)) {
+            if (data.type === 'admin.connect') {
+                handler = new MessageHandler(event.source);
+                messageHandlers.set(data.windowID, handler);
+            } else {
+                return debug('received message before handler creation', data);
+            }
+        } else if (data.type === 'admin.disconnect') {
+            messageHandlers.delete(data.windowID);
+            return;
+        }
+        messageHandlers.get(data.windowID).handleMessage(data);
+    } catch (e) {}
 });
 
 exports.postAll = function(type, message) {
