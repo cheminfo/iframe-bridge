@@ -1,11 +1,6 @@
 'use strict';
 
-const Debug = require('debug');
-if (window.DebugNS) {
-    Debug.enable(window.DebugNS);
-}
-
-const debug = Debug('iframe-bridge:main');
+const debug = require('debug')('iframe-bridge:main');
 
 const MessageHandler = require('./MessageHandler');
 const messageHandlers = new Map();
@@ -35,8 +30,8 @@ window.addEventListener('message', function (event) {
     } catch (e) {}
 });
 
-exports.postAll = function(type, message) {
-    messageHandlers.forEach(function(messageHandler, windowID) {
+exports.postAll = function (type, message) {
+    messageHandlers.forEach(function (messageHandler, windowID) {
         var data = {
             windowID,
             message,
@@ -46,9 +41,9 @@ exports.postAll = function(type, message) {
     });
 };
 
-exports.postMessage = function(type, message, windowId) {
+exports.postMessage = function (type, message, windowId) {
     let messageHandler = messageHandlers.get(windowId);
-    if(messageHandler) {
+    if (messageHandler) {
         messageHandler.postMessage({
             windowId,
             message,

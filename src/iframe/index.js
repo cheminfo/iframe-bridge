@@ -1,13 +1,9 @@
 'use strict';
 
-const Debug = require('debug');
-window.Debug = Debug;
-
-const debug = Debug('iframe-bridge:iframe');
+const debug = require('debug')('iframe-bridge:iframe');
 const MessageHandler = require('./MessageHandler');
 
 let messageHandler = new MessageHandler();
-
 
 messageHandler.init(window.parent);
 window.addEventListener('message', function (event) {
@@ -26,6 +22,6 @@ exports.onMessage = function (cb) {
     messageHandler.on('message', cb);
 };
 
-exports.ready = function() {
-      messageHandler.handlePendingMessages();
+exports.ready = function () {
+    messageHandler.handlePendingMessages();
 };
