@@ -5,6 +5,9 @@
   "author": "Michaël Zasso",
   "repository": "cheminfo-js/iframe-bridge",
   "main": "./src/main/index.js",
+  "files": [
+    "src"
+  ],
   "bugs": {
     "url": "https://github.com/cheminfo-js/iframe-bridge/issues"
   },
