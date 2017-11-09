@@ -32,10 +32,11 @@ class MessageHandler extends EventEmitter {
         });
 
         window.addEventListener('unload', () => {
-            this.messageSource.postMessage({
-                type: 'admin.disconnect',
-                windowID: this.windowID
-            }, '*');
+            this.messageSource.postMessage(
+                JSON.stringify({
+                    type: 'admin.disconnect',
+                    windowID: this.windowID
+                }), '*');
         });
 
         this.postPendingMessages();
