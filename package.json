@@ -18,9 +18,9 @@
     "build": "cheminfo build --no-uglify --root IframeBridge --entry src/iframe/index.js -b"
   },
   "dependencies": {
-    "debug": "^2.2.0"
+    "debug": "^3.1.0"
   },
   "devDependencies": {
-    "cheminfo-tools": "^1.20.0"
+    "cheminfo-tools": "^1.20.3"
   }
 }

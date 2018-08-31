@@ -5,23 +5,25 @@ const MessageHandler = require('./MessageHandler');
 
 let messageHandler = new MessageHandler();
 
-messageHandler.init(window.parent);
-window.addEventListener('message', function (event) {
+if (typeof window !== 'undefined') {
+  messageHandler.init(window.parent);
+  window.addEventListener('message', function(event) {
     try {
-        let data = JSON.parse(event.data);
-        debug('message received', data);
-        messageHandler.handleMessage(data);
+      let data = JSON.parse(event.data);
+      debug('message received', data);
+      messageHandler.handleMessage(data);
     } catch (e) {}
-});
+  });
+}
 
-exports.postMessage = function (type, message) {
-    return messageHandler.postMessage(type, message);
+exports.postMessage = function postMessage(type, message) {
+  return messageHandler.postMessage(type, message);
 };
 
-exports.onMessage = function (cb) {
-    messageHandler.on('message', cb);
+exports.onMessage = function onMessage(cb) {
+  messageHandler.on('message', cb);
 };
 
-exports.ready = function () {
-    messageHandler.handlePendingMessages();
+exports.ready = function ready() {
+  messageHandler.handlePendingMessages();
 };
