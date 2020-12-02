@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function(data, types) {
+module.exports = function (data, types) {
   switch (types[0]) {
     case 'url':
       data.message = location.href;

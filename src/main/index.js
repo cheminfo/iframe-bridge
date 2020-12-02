@@ -1,20 +1,15 @@
 'use strict';
 
-const debug = require('debug')('iframe-bridge:main');
-
 const MessageHandler = require('./MessageHandler');
 const messageHandlers = new Map();
 
 // Support server-side-rendering
 if (typeof window !== 'undefined') {
-  window.addEventListener('message', function(event) {
+  window.addEventListener('message', function (event) {
     try {
       let data = JSON.parse(event.data);
-      if (!data.windowID) {
-        return debug('received a message without windowID', data);
-      }
-      if (!data.type) {
-        return debug('received a message without type', data);
+      if (!data.windowID || !data.type) {
+        return;
       }
       let handler;
       if (!messageHandlers.has(data.windowID)) {
@@ -22,7 +17,7 @@ if (typeof window !== 'undefined') {
           handler = new MessageHandler(event.source);
           messageHandlers.set(data.windowID, handler);
         } else {
-          return debug('received message before handler creation', data);
+          return;
         }
       } else if (data.type === 'admin.disconnect') {
         messageHandlers.delete(data.windowID);
@@ -33,28 +28,28 @@ if (typeof window !== 'undefined') {
   });
 }
 
-exports.postAll = function(type, message) {
-  messageHandlers.forEach(function(messageHandler, windowID) {
-    var data = {
+exports.postAll = function (type, message) {
+  messageHandlers.forEach(function (messageHandler, windowID) {
+    const data = {
       windowID,
       message,
-      type
+      type,
     };
     messageHandler.postMessage(data);
   });
 };
 
-exports.postMessage = function(type, message, windowId) {
+exports.postMessage = function (type, message, windowId) {
   let messageHandler = messageHandlers.get(windowId);
   if (messageHandler) {
     messageHandler.postMessage({
       windowId,
       message,
-      type
+      type,
     });
   }
 };
 
-exports.registerHandler = function(type, callback) {
+exports.registerHandler = function (type, callback) {
   MessageHandler.registerHandler(type, callback);
 };
