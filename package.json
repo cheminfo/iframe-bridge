@@ -4,9 +4,11 @@
   "description": "Communicate between iframes and a control page",
   "author": "Michaël Zasso",
   "repository": "cheminfo/iframe-bridge",
-  "main": "./src/main/index.js",
+  "main": "main.js",
   "files": [
-    "src"
+    "src",
+    "iframe.js",
+    "main.js"
   ],
   "bugs": {
     "url": "https://github.com/cheminfo/iframe-bridge/issues"
