@@ -8,7 +8,9 @@
   "files": [
     "src",
     "iframe.js",
-    "main.js"
+    "iframe.d.ts",
+    "main.js",
+    "main.d.ts"
   ],
   "bugs": {
     "url": "https://github.com/cheminfo/iframe-bridge/issues"
