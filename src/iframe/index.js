@@ -4,7 +4,7 @@ const MessageHandler = require('./MessageHandler');
 
 const messageHandler = new MessageHandler();
 
-if (typeof window !== 'undefined') {
+if (typeof window !== 'undefined' && window.parent !== window) {
   messageHandler.init(window.parent);
   window.addEventListener('message', function (event) {
     try {
