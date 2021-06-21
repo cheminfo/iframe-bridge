@@ -1,13 +1,11 @@
-'use strict';
+import EventEmitter from 'eventemitter3';
 
-const Message = require('./Message');
-
-const EventEmitter = require('events');
+import Message from './Message.js';
 
 let idCounter = 0;
 let postedMessages = new Map();
 
-class MessageHandler extends EventEmitter {
+export default class MessageHandler extends EventEmitter {
   constructor() {
     super();
     this.readyToPost = false;
@@ -28,13 +26,13 @@ class MessageHandler extends EventEmitter {
     this.messageSource = messageSource;
     this._postMessageToSource({
       type: 'admin.connect',
-      windowID: this.windowID
+      windowID: this.windowID,
     });
 
     window.addEventListener('unload', () => {
       this._postMessageToSource({
         type: 'admin.disconnect',
-        windowID: this.windowID
+        windowID: this.windowID,
       });
     });
 
@@ -47,7 +45,7 @@ class MessageHandler extends EventEmitter {
       type,
       message,
       messageID: id,
-      windowID: this.windowID
+      windowID: this.windowID,
     };
     let theMessage = new Message(id, toPost);
     if (this.readyToPost) {
@@ -101,5 +99,3 @@ class MessageHandler extends EventEmitter {
     }
   }
 }
-
-module.exports = MessageHandler;

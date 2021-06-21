@@ -1,6 +1,4 @@
-'use strict';
-
-const MessageHandler = require('./MessageHandler');
+import MessageHandler from './MessageHandler.js';
 
 const messageHandler = new MessageHandler();
 
@@ -10,18 +8,20 @@ if (typeof window !== 'undefined' && window.parent !== window) {
     try {
       const data = JSON.parse(event.data);
       messageHandler.handleMessage(data);
-    } catch (e) {}
+    } catch {
+      // ignore
+    }
   });
 }
 
-exports.postMessage = function postMessage(type, message) {
+export function postMessage(type, message) {
   return messageHandler.postMessage(type, message);
-};
+}
 
-exports.onMessage = function onMessage(cb) {
+export function onMessage(cb) {
   messageHandler.on('message', cb);
-};
+}
 
-exports.ready = function ready() {
+export function ready() {
   messageHandler.handlePendingMessages();
-};
+}

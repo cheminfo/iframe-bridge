@@ -1,6 +1,5 @@
-'use strict';
+import MessageHandler from './MessageHandler.js';
 
-const MessageHandler = require('./MessageHandler');
 const messageHandlers = new Map();
 
 // Support server-side-rendering
@@ -24,11 +23,13 @@ if (typeof window !== 'undefined') {
         return;
       }
       messageHandlers.get(data.windowID).handleMessage(data);
-    } catch (e) {}
+    } catch {
+      // ignore
+    }
   });
 }
 
-exports.postAll = function (type, message) {
+export function postAll(type, message) {
   messageHandlers.forEach(function (messageHandler, windowID) {
     const data = {
       windowID,
@@ -37,9 +38,9 @@ exports.postAll = function (type, message) {
     };
     messageHandler.postMessage(data);
   });
-};
+}
 
-exports.postMessage = function (type, message, windowId) {
+export function postMessage(type, message, windowId) {
   let messageHandler = messageHandlers.get(windowId);
   if (messageHandler) {
     messageHandler.postMessage({
@@ -48,8 +49,8 @@ exports.postMessage = function (type, message, windowId) {
       type,
     });
   }
-};
+}
 
-exports.registerHandler = function (type, callback) {
+export function registerHandler(type, callback) {
   MessageHandler.registerHandler(type, callback);
-};
+}

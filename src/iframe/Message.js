@@ -1,26 +1,23 @@
-'use strict';
+import EventEmitter from 'eventemitter3';
 
-const EventEmitter = require('events').EventEmitter;
-const promise = Symbol();
+const kPromise = Symbol('message.promise');
 
-class Message extends EventEmitter {
+export default class Message extends EventEmitter {
   constructor(id, data) {
     super();
     this.id = id;
     this.data = data;
-    this[promise] = new Promise((resolve, reject) => {
+    this[kPromise] = new Promise((resolve, reject) => {
       this._resolve = resolve;
       this._reject = reject;
     });
   }
 
   then(onResolve, onReject) {
-    return this[promise].then(onResolve, onReject);
+    return this[kPromise].then(onResolve, onReject);
   }
 
   catch(onReject) {
-    return this[promise].catch(onReject);
+    return this[kPromise].catch(onReject);
   }
 }
-
-module.exports = Message;

@@ -1,10 +1,8 @@
-'use strict';
-
-const bridgeHandler = require('./bridgeHandler');
+import bridgeHandler from './bridgeHandler.js';
 
 const registeredHandlers = new Map();
 
-class MessageHandler {
+export default class MessageHandler {
   constructor(theWindow) {
     this.window = theWindow;
   }
@@ -19,7 +17,7 @@ class MessageHandler {
     if (registeredHandlers.has(type)) {
       registeredHandlers.get(type).call(this, data, types);
     } else {
-      const message = 'no handler registered for type ' + type;
+      const message = `no handler registered for type ${type}`;
       data.status = 'error';
       data.message = message;
       this.postMessage(data);
@@ -32,5 +30,3 @@ MessageHandler.registerHandler = function (type, callback) {
 };
 
 MessageHandler.registerHandler('bridge', bridgeHandler);
-
-module.exports = MessageHandler;
