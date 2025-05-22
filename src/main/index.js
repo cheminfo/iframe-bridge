@@ -40,13 +40,13 @@ export function postAll(type, message) {
   }
 }
 
-export function postMessage(type, message, windowId) {
+export function postMessage(messageType, message, windowId) {
   let messageHandler = messageHandlers.get(windowId);
   if (messageHandler) {
     messageHandler.postMessage({
-      windowId,
+      type: messageType,
       message,
-      type,
+      windowId,
     });
   }
 }
