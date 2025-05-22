@@ -7,4 +7,4 @@ export function postMessage<MessageType>(
 export function registerHandler<MessageType>(
   type: string,
   callback: (message: MessageType) => void,
-);
+): void;
