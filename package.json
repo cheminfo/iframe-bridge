@@ -1,6 +1,6 @@
 {
   "name": "iframe-bridge",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "Communicate between iframes and a control page",
   "author": "Michaël Zasso",
   "repository": "cheminfo/iframe-bridge",
