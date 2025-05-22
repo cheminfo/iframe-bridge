@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.2](https://github.com/cheminfo/iframe-bridge/compare/v3.0.1...v3.0.2) (2025-05-22)
+
+
+### Bug Fixes
+
+* postMessage minification ([c40f17a](https://github.com/cheminfo/iframe-bridge/commit/c40f17a416c5e3230f6114b3dc9be2eb5e3a6481))
+
 ## [3.0.1](https://github.com/cheminfo/iframe-bridge/compare/v3.0.0...v3.0.1) (2025-05-22)
 
 
