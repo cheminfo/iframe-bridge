@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.1](https://github.com/cheminfo/iframe-bridge/compare/v3.0.0...v3.0.1) (2025-05-22)
+
+
+### Bug Fixes
+
+* types ([0287c49](https://github.com/cheminfo/iframe-bridge/commit/0287c4952ce67c7618f065fdb1879b232901ad05))
+
 ## [3.0.0](https://github.com/cheminfo/iframe-bridge/compare/v2.0.0...v3.0.0) (2025-05-22)
 
 
