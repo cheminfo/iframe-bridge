@@ -4,7 +4,7 @@ const messageHandlers = new Map();
 
 // Support server-side-rendering
 if (typeof window !== 'undefined') {
-  window.addEventListener('message', function (event) {
+  window.addEventListener('message', function onMessage(event) {
     try {
       let data = JSON.parse(event.data);
       if (!data.windowID || !data.type) {
@@ -30,14 +30,14 @@ if (typeof window !== 'undefined') {
 }
 
 export function postAll(type, message) {
-  messageHandlers.forEach(function (messageHandler, windowID) {
+  for (const [windowID, messageHandler] of messageHandlers.entries()) {
     const data = {
       windowID,
       message,
       type,
     };
     messageHandler.postMessage(data);
-  });
+  }
 }
 
 export function postMessage(type, message, windowId) {

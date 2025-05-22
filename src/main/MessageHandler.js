@@ -3,6 +3,10 @@ import bridgeHandler from './bridgeHandler.js';
 const registeredHandlers = new Map();
 
 export default class MessageHandler {
+  static registerHandler(type, callback) {
+    registeredHandlers.set(type, callback);
+  }
+
   constructor(theWindow) {
     this.window = theWindow;
   }
@@ -24,9 +28,5 @@ export default class MessageHandler {
     }
   }
 }
-
-MessageHandler.registerHandler = function (type, callback) {
-  registeredHandlers.set(type, callback);
-};
 
 MessageHandler.registerHandler('bridge', bridgeHandler);

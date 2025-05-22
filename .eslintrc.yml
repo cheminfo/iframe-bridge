@@ -1,9 +1,0 @@
-extends: cheminfo
-parserOptions:
-  sourceType: module
-env:
-  browser: true
-rules:
-  'import/no-extraneous-dependencies':
-    - error
-    - packageDir: ./

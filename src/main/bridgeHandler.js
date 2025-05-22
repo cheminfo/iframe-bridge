@@ -8,5 +8,6 @@ export default function bridgeHandler(data, types) {
       data.message = `unknown type: ${types[0]}`;
       break;
   }
+  // eslint-disable-next-line no-invalid-this
   this.postMessage(data);
 }

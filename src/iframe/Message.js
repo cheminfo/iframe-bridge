@@ -13,6 +13,7 @@ export default class Message extends EventEmitter {
     });
   }
 
+  // eslint-disable-next-line unicorn/no-thenable
   then(onResolve, onReject) {
     return this[kPromise].then(onResolve, onReject);
   }

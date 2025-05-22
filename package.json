@@ -4,14 +4,14 @@
   "description": "Communicate between iframes and a control page",
   "author": "Michaël Zasso",
   "repository": "cheminfo/iframe-bridge",
-  "type": "commonjs",
+  "type": "module",
   "exports": {
     "./main": {
-      "require": "./lib-cjs/main/index.js",
+      "types": "./main.d.ts",
       "default": "./src/main/index.js"
     },
     "./iframe": {
-      "require": "./lib-cjs/iframe/index.js",
+      "types": "./iframe.d.ts",
       "default": "./src/iframe/index.js"
     }
   },
@@ -27,23 +27,19 @@
   "homepage": "https://github.com/cheminfo/iframe-bridge",
   "license": "MIT",
   "scripts": {
-    "compile": "babel src --out-dir lib-cjs",
     "eslint": "eslint .",
     "eslint-fix": "npm run eslint -- --fix",
-    "prepack": "npm run compile",
     "prettier": "prettier --check .",
     "prettier-write": "prettier --write .",
     "test": "npm run eslint && npm run prettier"
   },
   "dependencies": {
-    "eventemitter3": "^4.0.7"
+    "eventemitter3": "^5.0.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.14.5",
-    "@babel/core": "^7.14.6",
-    "@babel/plugin-transform-modules-commonjs": "^7.14.5",
-    "eslint": "^7.29.0",
-    "eslint-config-cheminfo": "^5.2.4",
-    "prettier": "^2.3.1"
+    "eslint": "^9.27.0",
+    "eslint-config-cheminfo": "^14.1.1",
+    "globals": "^16.1.0",
+    "prettier": "^3.5.3"
   }
 }

@@ -4,7 +4,7 @@ const messageHandler = new MessageHandler();
 
 if (typeof window !== 'undefined' && window.parent !== window) {
   messageHandler.init(window.parent);
-  window.addEventListener('message', function (event) {
+  window.addEventListener('message', function onMessage(event) {
     try {
       const data = JSON.parse(event.data);
       messageHandler.handleMessage(data);
